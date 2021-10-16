@@ -3,7 +3,7 @@
 using namespace std;
 
 
-void solve(string s, int n, int d, int c, int m)
+void solve(string s, long long n, long long d, long long c, long long m)
 {
 	int dct = 0;
 	int dins = 0;
@@ -73,7 +73,7 @@ int main()
 
 	for (int i = 0; i < t; i++)
 	{
-		int n, d, c, m = 0;
+		long long n, d, c, m = 0;
 		cin >> n >> d >> c >> m;
 		string s;
 		cin >> s;
