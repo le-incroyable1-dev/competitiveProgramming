@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long int;
+#define ll long long int
 
-//NOT CHECKED YET
+//INCOMPLETE
 
 //optimized isPrime from GFG
 bool isPrime(ll n)
