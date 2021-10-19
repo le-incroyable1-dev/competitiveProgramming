@@ -5,6 +5,7 @@ using namespace std;
 
 //INCOMPLETE
 
+/*
 //optimized isPrime from GFG
 bool isPrime(ll n)
 {
@@ -42,69 +43,58 @@ ll countDistinct(ll *arr, ll n)
  
     return res;
 }
+*/
 
 void solve(ll n, ll *B)
 {
-    unordered_set <ll> ele;
+    ll * A = new ll[n];
+    //ll * C = new ll[n];
+    ll temp = 0;
+    //ll distEle;
+    unordered_set <ll> Cset;
+    bool check = false;
+    bool hasOne = false;
     
-    for(ll i = 0; i < n; i++)
+    for(int i = 0; i < n; i++)
     {
-        ele.insert(B[i]);
-    }
-    
-    ll * Af = new ll[n];
-    ll * As = new ll[n];
-    
-    ll * Cf = new ll[n];
-    ll * Cs = new ll[n];
-    
-    ll reqPrime = 1;
-    
-    for(ll i = 2; i < n; i++)
-    {
-        if(isPrime(i) && ele.find(i) == ele.end())
-        {
-            reqPrime = i;
+        if(B[i] == 1){
+            hasOne = true;
             break;
         }
     }
     
     for(ll i = 0; i < n; i++)
     {
-        Af[i] = reqPrime;
-    }
-    
-    reqPrime = 1;
-    
-    for(ll i = (n+1); i > n ; i++)
-    {
-        if(isPrime(i))
+        for(ll j = 0; j <= 2*B[i]; j++)
         {
-            reqPrime = i;
-            break;
+            
+            if(hasOne && B[i] == 1)
+            {
+                check = true;
+            }
+            
+            temp = j % B[i];
+            if(Cset.find(temp) == Cset.end() || j == 2*B[i])
+            {
+                if(hasOne && check == false && j!=2*B[i])
+                {
+                    if(temp == 0)
+                    {
+                        continue;
+                    }
+                }
+                
+                A[i] = j;
+                Cset.insert(temp);
+                break;
+            }
         }
+        
     }
     
     for(ll i = 0; i < n; i++)
     {
-        As[i] = reqPrime;
-    }
-    
-    for(ll i = 0; i < n; i++)
-    {
-        Cf[i] = Af[i] % B[i];
-        Cs[i] = As[i] % B[i];
-    }
-    
-    if(countDistinct(Cf, n) >= countDistinct(Cs, n))
-    {
-        for(ll i = 0; i < n; i++)
-        cout << Af[i] << " ";
-    }
-    else
-    {
-        for(ll i = 0; i < n; i++)
-        cout << As[i] << " ";
+        cout << A[i] << " ";
     }
     
     return;
