@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 #define ll long long int
-
 //INCOMPLETE
 
 /*
@@ -65,7 +65,7 @@ void solve(ll n, ll *B)
     
     for(ll i = 0; i < n; i++)
     {
-        for(ll j = 0; j <= 2*B[i]; j++)
+        for(ll j = B[i]; j >= 0; j--)
         {
             
             if(hasOne && B[i] == 1)
@@ -73,10 +73,15 @@ void solve(ll n, ll *B)
                 check = true;
             }
             
-            temp = j % B[i];
-            if(Cset.find(temp) == Cset.end() || j == 2*B[i])
+            if(check && B[i]!=1)
             {
-                if(hasOne && check == false && j!=2*B[i])
+                check = false;
+            }
+            
+            temp = j % B[i];
+            if(Cset.find(temp) == Cset.end() || j == 0)
+            {
+                if(hasOne && !check && j!=0)
                 {
                     if(temp == 0)
                     {
