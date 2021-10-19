@@ -55,15 +55,10 @@ void solve(ll n, ll *B)
     ll * Af = new ll[n];
     ll * As = new ll[n];
     
-    for(ll i = 0; i < n; i++)
-    {
-        Af[i] = 1;
-        As[i] = 1;
-    }
+    ll * Cf = new ll[n];
+    ll * Cs = new ll[n];
     
-    ll * C = new ll[n];
-    
-    ll reqPrime = 0;
+    ll reqPrime = 1;
     
     for(ll i = 2; i < n; i++)
     {
@@ -79,7 +74,7 @@ void solve(ll n, ll *B)
         Af[i] = reqPrime;
     }
     
-    reqPrime = 0;
+    reqPrime = 1;
     
     for(ll i = (n+1); i > n ; i++)
     {
@@ -95,7 +90,13 @@ void solve(ll n, ll *B)
         As[i] = reqPrime;
     }
     
-    if(countDistinct(Af) >= countDistinct(As))
+    for(ll i = 0; i < n; i++)
+    {
+        Cf[i] = Af[i] % B[i];
+        Cs[i] = As[i] % B[i];
+    }
+    
+    if(countDistinct(Cf, n) >= countDistinct(Cs, n))
     {
         for(ll i = 0; i < n; i++)
         cout << Af[i] << " ";
@@ -105,6 +106,8 @@ void solve(ll n, ll *B)
         for(ll i = 0; i < n; i++)
         cout << As[i] << " ";
     }
+    
+    return;
 }
 
 int main() {
@@ -126,6 +129,8 @@ int main() {
 	    solve(n,B);
 	    
 	    cout << endl;
+	    
+	    t--;
 	}
 	
 	return 0;
