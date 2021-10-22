@@ -90,6 +90,12 @@ using namespace std;
 #define ll long long int
 
 
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long int
+
+
 void mergeArrays(int arr1[], int arr2[], int n1, int n2, int arr3[])
 {
 	int i = 0, j = 0, k = 0;
@@ -426,8 +432,8 @@ int* part3(int* arr, int &n)
 				break;
 			}
 		}
-
-
+        
+        
 		if (ne != -1 && p != -1)
 		{
 			r++;
@@ -473,6 +479,35 @@ int* part3(int* arr, int &n)
 }
 
 
+bool valid(int* arr, int n)
+{
+	int check = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] % 2 == 0)
+			check++;
+	}
+
+    if(check == n)
+	    return false;
+	    
+    check = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] < 0)
+			check++;
+	}
+	
+	if(check == n)
+	    return false;
+
+	return true;
+}
+
+
+
 int main() {
 
 	int n = 0;
@@ -490,6 +525,8 @@ int main() {
 		cin >> arr[i];
 	}
 
+     // ------------------------------------ PART 1 -----------------------------------------------   
+    
 	int* ind = new int[n];
 	ind[0] = 0;
 	ind[1] = n - 1;
@@ -502,12 +539,38 @@ int main() {
 	
 	part1(ind, res, arr, n);
 	
+	if(!valid(res, n))
+	{
+	    cout << " ";
+	    return 0;
+	}
+	
+	// --------------------------------------------------------------------------------------------
+	
 	res = part2(res, n);
+	
+	if(!valid(res, n))
+	{
+	    cout << " ";
+	    return 0;
+	}
 	
 	res = part3(res, n);
 	
+	if(!valid(res, n))
+	{
+	    cout << " ";
+	    return 0;
+	}
+	
 	res = part2(res, n);
-
+	
+	if(!valid(res, n))
+	{
+	    cout << " ";
+	    return 0;
+	}
+	
 	unordered_set <int> myset;
 	vector<int> finalResult;
 
