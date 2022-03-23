@@ -1,0 +1,86 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define mod 1000000007
+#define pb push_back
+#define mp make_pair
+#define fi first
+#define sec second
+typedef long long ll;
+typedef long double  ld;
+#define pii pair<ll,ll>
+#define vi vector< ll >
+#define vvi vector< vi >
+#define vpi vector< pii >c
+#define vvpi vector< vpi >
+#define fast ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0)
+#define test(t) ll t;cin>>t;while(t--)
+#define mem(a,b) memset(a,b,sizeof(a))
+#define inn freopen("input.txt", "r", stdin)
+#define outt freopen("output.txt", "w", stdout)
+#define all(arr) arr.begin(),arr.end()
+#define fr(i,n) for(int i=0;i<(n);++i)
+#define rep(i,a,b) for(ll i=a;i<=b;++i)
+#define per(i,a,b) for(ll i=a;i>=b;i--)
+#define remin(a,b) (a=min((a),(b)))
+#define remax(a,b) (a=max((a),(b)))
+#define itr(type) type::iterator itr
+long long powerof2[] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576,2097152,4194304,8388608,16777216,33554432,67108864,134217728,268435456,536870912,1073741824,2147483648,4294967296};
+
+float distance(int x1, int y1, int x2, int y2)
+{
+    // Calculating distance
+    return sqrt(pow(x2 - x1, 2)+ pow(y2 - y1, 2));
+}
+
+void sol(int x, int y){
+
+    int ans;
+
+    if(x == 0 && y == 0){
+        cout << 0 << endl;
+        return;
+    }
+
+    if(floor(distance(0,0,x,y)) == ceil(distance(0,0,x,y))){
+        cout << 1 << endl;
+        return;
+    }
+
+    fr(i, 51){
+        fr(j, 51){
+            float dist1 = distance(0,0,i,j);
+
+            if(floor(dist1) != ceil(dist1))
+            continue;
+
+            float dist2 = distance(i, j, x, y);
+
+            if(floor(dist2) != ceil(dist2))
+            continue;
+
+            cout << 2 <<endl;
+            return;
+        }
+    }
+
+    cout << -1 << endl;
+    return;
+    
+    
+}
+
+
+
+int main(void){
+    
+    fast;
+
+    test(t){
+
+        int x,y;
+        cin >> x >> y;
+
+        sol(x, y);
+    }
+    
+}
