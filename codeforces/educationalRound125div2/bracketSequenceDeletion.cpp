@@ -27,85 +27,38 @@ typedef long double  ld;
 long long powerof2[] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576,2097152,4194304,8388608,16777216,33554432,67108864,134217728,268435456,536870912,1073741824,2147483648,4294967296};
 
 
-//INCOMPLETE
-bool isPalindrome(string S)
-{
-    // Stores the reverse of the
-    // string S
-    string P = S;
- 
-    // Reverse the string P
-    reverse(P.begin(), P.end());
- 
-    // If S is equal to P
-    if (S == P) {
-        // Return "Yes"
-        return true;
-    }
-    // Otherwise
-    else {
-        // return "No"
-        return false;
-    }
-}
 
-bool isRegular(string s){
-    ll c1 = 0;
-    ll c2 = 0;
-
-    fr(i, s.length()){
-
-        if(s[i] == '(')
-        c1++;
-        else
-        c2++;
-    }
-
-    return c1==c2;
-}
-
-void sol(ll n, string s){
-
-    ll c = 0;
-    ll r = s.length();
-    ll cur = 2;
-    ll removed = 0;
-    string prefix = "";
-
-    while(removed <= r){
-
-        prefix = s.substr(0, cur);
-
-        if(isRegular(prefix) && isPalindrome(prefix)){
-            c++;
-            s = s.substr(cur-1, s.length()-cur);
-            cur = 2;
-            removed += 2;
-        }
-        else{
-            cur += 2;
-        }
-
-    }
-
-    cout << c << " " << r-removed << endl;
-
-}
-
-
-
-int main(void){
+int main() {
+#ifdef _DEBUG
+    freopen("input.txt", "r", stdin);
+//  freopen("output.txt", "w", stdout);
+#endif
     
-    fast;
-
-    test(t){
-        ll n;
-        cin >> n;
-
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
         string s;
-        cin >> s;
-
-        sol(n,s);
+        cin >> n >> s;
+        int l = 0;
+        int cnt = 0;
+        while (l + 1 < n) {
+            if (s[l] == '(' || (s[l] == ')' && s[l + 1] == ')')) {
+                l += 2;
+            } else {
+                int r = l + 1;
+                while (r < n && s[r] != ')') {
+                    ++r;
+                }
+                if (r == n) {
+                    break;
+                }
+                l = r + 1;
+            }
+            ++cnt;
+        }
+        cout << cnt << ' ' << n - l << '\n';
     }
     
+    return 0;
 }
