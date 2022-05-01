@@ -1,0 +1,17 @@
+1671C - Dolce Vita
+Firstly, note that if we want to buy as many packs as possible, then it's optimal to buy the cheapest packs. 
+In other words, if we sort all packs, we'll always buy a prefix of array a.
+
+Next, note that each day we buy some number of packs i∈[1,n], so, instead of iterating through the days, 
+we can iterate through the number of packs i and for each i calculate the number of days we'll buy exactly i packs.
+
+Since the prices increasing and at day k+1 the price is ai+k, then exists last day ki+1 such that as days 1,2,…,ki+1 
+we could buy i packs and at days ki+2,ki+3,… we can't. And we can find ki as maximum possible integer solution to inequation 
+(a1+ki)+⋯+(ai+ki)≤x or ki=⌊x−(a1+⋯+ai)/i⌋.
+
+We can calculate all ki using prefix sums a1+⋯+ai in linear time. As a result, we buy
+
+n packs in days (0,k1+1]; n⋅(k1+1) in total;
+n−1 packs in days (k1+1,k2+1]; (n−1)⋅(k2−k1) in total;
+n−2 packs in days (k2+1,k3+1]; (n−2)⋅(k3−k2) in total and so on.
+The resulting complexity is O(nlogn) because of sort.
