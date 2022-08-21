@@ -37,6 +37,8 @@ public:
         fr(i, n)
         sh[i] = 0;
 
+        
+        //Sweep-Line Algorithm
         for(auto v : shifts){
             int apply;
             if(v[2] == 1)
