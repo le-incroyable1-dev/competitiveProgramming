@@ -1,3 +1,3 @@
 # competitiveProgramming
 
-Problems from competitive programming/problem-solving platforms like Codeforces, Interviewbit etc.
+Problems from competitive programming/problem-solving platforms like Codeforces, Leetcode etc.
