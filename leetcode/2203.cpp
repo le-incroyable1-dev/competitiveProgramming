@@ -47,27 +47,24 @@ public:
         
         for(auto e : edges){
             g[e[0]].push_back(make_pair(e[1], e[2]));
-            //normal graph
-          
             gopp[e[1]].push_back(make_pair(e[0], e[2]));
-            //opposite graph to calculate distance from dest to all nodes;
         }
         
-        vector<ll> vs1(n, INT_MAX);
-        vector<ll> vs2(n, INT_MAX);
-        vector<ll> vd(n, INT_MAX);
+        vector<ll> vs1(n, LLONG_MAX);
+        vector<ll> vs2(n, LLONG_MAX);
+        vector<ll> vd(n, LLONG_MAX);
         
         dijkstraop(src1, vs1, g, n);
         dijkstraop(src2, vs2, g, n);
         dijkstraop(dest, vd, gopp, n);
         
-        ll ans = INT_MAX;
+        ll ans = LLONG_MAX;
         
-        for(int i = 0; i < n; ++i){            
-            if(vs1[i] != INT_MAX && vs2[i] != INT_MAX && vd[i] != INT_MAX)
+        for(int i = 0; i < n; ++i){       
+            if(vs1[i] == LLONG_MAX || vs2[i] == LLONG_MAX || vd[i] == LLONG_MAX) continue;     
             ans = min(ans, vs1[i] + vs2[i] + vd[i]);
         }
         
-        return (ans == INT_MAX ? -1 : ans);
+        return (ans == LLONG_MAX ? -1 : ans);
     }
 };
