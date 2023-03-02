@@ -30,54 +30,25 @@ typedef long double  ld;
 long long powerof2[] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576,2097152,4194304,8388608,16777216,33554432,67108864,134217728,268435456,536870912,1073741824,2147483648,4294967296};
 
 
-
-int calc(int num, int sz, int r, vector<vector<int>> &dp){
-
-    if(dp[num][sz] != -1) return dp[num][sz];
-    if(sz == 1) return dp[num][sz] = 1;
-
-    int k = 2;
-    int ans = 0;
-
-    while(num*k <= r){
-        (ans += calc(num*k, sz-1, r, dp))%=mod;
-        ++k;
-    }
-
-    return dp[num][sz] = ans;
-}
-
 void sol(int l, int r){
 
-    int cur = l;
     int sz = 0;
-    while(cur <= r) ++sz, cur*=2;
 
-    cout << sz << " ";
+    int cur = l;
+    while(cur <= r){
+        ++sz;
+        cur *= 2;
+    }
 
     int count = 0;
 
-    int R = r;
-    int L = l;
-    int max_val = L;
+    count += (r / (1 << (sz - 1)) - l + 1);
 
-    while(l <= r){
-        int mid = l + (r-l)/2;
+    if(sz > 1)
+    count += (sz - 1) * max(0, (r / (1 << (sz - 2)) / 3 - l + 1));
 
-        if(mid * pow(2, sz-1) <= R) l = mid+1, max_val = max(max_val, mid);
-        else r = mid-1;
-    }
-
-    vector<vector<int>> dp(1000001, vector<int>(21, -1));
+    cout << sz << " " << count << "\n";
    
-    while(L <= max_val){
-        (count += calc(L, sz, R, dp))%=mod;
-        ++L;
-    }
-
-    dp.clear();
-    
-    cout << count << "\n";
     return;
     
 }
