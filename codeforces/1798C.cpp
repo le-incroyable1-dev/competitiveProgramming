@@ -1,6 +1,3 @@
-///** INCOMPLETE
-
-
 //author : aurav
 #include<bits/stdc++.h>
 using namespace std;
@@ -48,40 +45,61 @@ void sol(){
 
     ll tags = n;
 
+    ll cur_gcd = ab[0];
+    ll cur_b_lcm = bv[0];
+    ll count = 0;
+
     fr(i, n){
-        ll cur = ab[i];
-        if(cur == 0) continue;
-        ll mx_count = 0;
-        unordered_map<ll, ll> m;
-        ll match_gcd;
-        fr(j, n){
-            if(i == j) continue;
-            if(ab[j] == 0) continue;
-            ll nxt = ab[j];
-            ll cur_gcd = __gcd <ll> (cur, nxt);
+        if(i == 0) continue;
 
-            if(cur_gcd%bv[i] != 0 || cur_gcd%bv[j] != 0) continue;
+        cur_gcd = __gcd <ll> (cur_gcd, ab[i]);
+        cur_b_lcm = (cur_b_lcm * bv[i])/(__gcd<ll> (cur_b_lcm, bv[i]));
 
-            m[cur_gcd]++;
-            if(m[cur_gcd] > mx_count) mx_count = m[cur_gcd], match_gcd = cur_gcd;
+        if(cur_gcd%cur_b_lcm == 0) ++count;
+        else{
+            tags -= count;
+            count = 0;
+            cur_b_lcm = bv[i];
+            cur_gcd = ab[i];
         }
-
-
-        fr(j, n){
-            if(i == j) continue;
-            if(ab[j] == 0) continue;
-            ll nxt = ab[j];
-            ll cur_gcd = __gcd <ll> (cur, nxt);
-
-            if(cur_gcd != match_gcd) continue;
-            ab[j] = 0;
-        }
-
-        tags -= mx_count;
-        m.clear();
-
-        ab[i] = 0;
     }
+
+    tags -= count;
+
+    // fr(i, n){
+    //     ll cur = ab[i];
+    //     if(cur == 0) continue;
+    //     ll mx_count = 0;
+    //     unordered_map<ll, ll> m;
+    //     ll match_gcd;
+    //     fr(j, n){
+    //         if(i == j) continue;
+    //         if(ab[j] == 0) continue;
+    //         ll nxt = ab[j];
+    //         ll cur_gcd = __gcd <ll> (cur, nxt);
+
+    //         if(cur_gcd%bv[i] != 0 || cur_gcd%bv[j] != 0) continue;
+
+    //         m[cur_gcd]++;
+    //         if(m[cur_gcd] > mx_count) mx_count = m[cur_gcd], match_gcd = cur_gcd;
+    //     }
+
+
+    //     fr(j, n){
+    //         if(i == j) continue;
+    //         if(ab[j] == 0) continue;
+    //         ll nxt = ab[j];
+    //         ll cur_gcd = __gcd <ll> (cur, nxt);
+
+    //         if(cur_gcd != match_gcd) continue;
+    //         ab[j] = 0;
+    //     }
+
+    //     tags -= mx_count;
+    //     m.clear();
+
+    //     ab[i] = 0;
+    // }
 
     cout << tags << "\n";
     return;
