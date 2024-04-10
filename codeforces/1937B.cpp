@@ -39,7 +39,9 @@ void sol(){
     fr(i, n) cin >> mat[0][i]; fr(i, n) cin >> mat[1][i];
     string res = "";
     int ways = 1;
-    fr(i, n - 1){
+    fr(i, n){
+        if(i + 1 == n){ res += mat[0][n - 1]; continue; }
+        
         char x = mat[0][i+1]; char y = mat[1][i];
         res += mat[0][i];
 
